@@ -1,5 +1,5 @@
 const UserCard = (user) => {
-  console.log(user);
+  //console.log(user);
   const { firstName, lastName, about, photoUrl } = user.user;
   return (
     <div className="card card-side bg-base-100 w-[40%]  shadow-xl">
