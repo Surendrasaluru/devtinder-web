@@ -6,11 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constants";
 
 const LoginPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleToggle = () => {
+    setIsLoginForm(!isLoginForm);
+  };
 
   const handleLogin = async () => {
     try {
@@ -22,7 +29,7 @@ const LoginPage = () => {
         },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data));
+      await dispatch(addUser(res.data));
       return navigate("/feed");
     } catch (err) {
       //console.log(err.message);
@@ -30,12 +37,70 @@ const LoginPage = () => {
     }
   };
 
+  const handleSignup = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/signup",
+        {
+          emailId,
+          firstName,
+          lastName,
+          password,
+        },
+        { withCredentials: true }
+      );
+      await dispatch(addUser(res.data.data));
+      //console.log(res);
+      return navigate("/profile");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
-    <div className="flex justify-center my-10">
-      <div className="card bg-base-500 w-96 shadow-xl">
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">LOGIN</h2>
+    <div className="flex justify-center mt-3 h-auto">
+      <div className="shadow-2xl shadow-slate-900 mx-auto text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md mt-20 py-10 px-8 rounded-xl">
+        <div className="">
+          <div className="flex space-x-28">
+            <h2 className="card-title">{isLoginForm ? "LOGIN" : "SIGNUP"}</h2>
+            <input
+              type="checkbox"
+              className="toggle"
+              defaultChecked
+              onChange={() => handleToggle()}
+            />
+          </div>
           <div>
+            {!isLoginForm && (
+              <>
+                <label className="form-control w-full max-w-xs my-2">
+                  <div className="label">
+                    <span className="label-text">FIRST NAME</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={firstName}
+                    className="input input-bordered w-full max-w-80"
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
+                  />
+                </label>
+                <label className="form-control w-full max-w-xs my-2">
+                  <div className="label">
+                    <span className="label-text">LAST NAME</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={lastName}
+                    className="input input-bordered w-full max-w-80"
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
+                  />
+                </label>
+              </>
+            )}
             <label className="form-control w-full max-w-xs my-2">
               <div className="label">
                 <span className="label-text">EMAIL ID</span>
@@ -66,8 +131,11 @@ const LoginPage = () => {
           <p className="text-red-400">{error}</p>
 
           <div className="card-actions justify-center">
-            <button className="btn btn-success" onClick={handleLogin}>
-              LOGIN
+            <button
+              className="btn btn-success"
+              onClick={isLoginForm ? handleLogin : handleSignup}
+            >
+              {isLoginForm ? "LOGIN" : "SIGNUP"}
             </button>
           </div>
         </div>
@@ -77,3 +145,12 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+/*
+shadow-2xl shadow-slate-900 mx-auto text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md mt-20 py-10 px-8 rounded-md
+
+*/
+/**
+ card bg-base-500 w-96 shadow-xl
+ card-body items-center text-center
+ */

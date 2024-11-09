@@ -7,7 +7,7 @@ import UserCard from "./UserCard";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
-  console.log(feed);
+  //console.log(feed);
   const dispatch = useDispatch();
   const getFeed = async () => {
     if (feed) return;
@@ -25,6 +25,9 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+
+  if (!feed) return;
+  if (feed.length === 0) return <h1>NO NEW USERS FOUND VISIT US LATER 😢</h1>;
 
   return (
     feed && (
