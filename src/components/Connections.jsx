@@ -34,17 +34,21 @@ const Connections = () => {
         return (
           <div
             key={connection._id}
-            className="flex justify-center text-center flex-row"
+            className="flex justify-center text-center py-4 flex-row"
           >
-            <div className="card card-side bg-black h-60 w-80 mb-3  shadow-xl">
+            <div className="card card-side w-140  bg-black shadow-xl">
               <figure>
-                <img src={photoUrl} alt="Profile" className="rounded-full" />
+                <img
+                  src={photoUrl}
+                  alt="Profile"
+                  className="rounded-full w-40"
+                />
               </figure>
               <div className="card-body">
-                <h2 className="card-title text-blue-300">
+                <h2 className="card-title">
                   {firstName} {lastName}
                 </h2>
-                <p className="text-slate-300 text-pretty">{about}</p>
+                <p>{about}</p>
               </div>
             </div>
           </div>
