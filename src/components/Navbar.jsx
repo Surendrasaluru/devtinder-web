@@ -29,7 +29,9 @@ const Navbar = () => {
       <div className="flex-none gap-2">
         {user && (
           <div className="dropdown dropdown-end mx-5 flex items-center">
-            <p className="px-4">Welcome {user.firstName} start waving now!</p>
+            <p className="px-12 flex justify-center mr-[7rem]">
+              Welcome {user.firstName} start waving now!
+            </p>
             <div
               tabIndex={0}
               role="button"
@@ -45,12 +47,23 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1]  w-52 p-2 shadow"
             >
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/connections" className="justify-between">
+                  Connections
+                  <span className="badge">0</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/requests" className="justify-between">
+                  Requests
+                  <span className="badge">0</span>
                 </Link>
               </li>
 
