@@ -28,20 +28,20 @@ const Connections = () => {
     return <h1>Start building your connections</h1>;
   }
   return (
-    <div className="text-center">
+    <div className="text-center ml-[25%]">
       {connections.map((connection) => {
         const { firstName, lastName, about, photoUrl } = connection;
         return (
           <div
             key={connection._id}
-            className="flex justify-center text-center py-4 flex-row"
+            className="justify-center text-center py-4 text-pretty max-w-[700px]"
           >
             <div className="card card-side w-140  bg-black shadow-xl">
               <figure>
                 <img
                   src={photoUrl}
                   alt="Profile"
-                  className="rounded-full w-40"
+                  className="rounded-full w-40 object-cover"
                 />
               </figure>
               <div className="card-body">

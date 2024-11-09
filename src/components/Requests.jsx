@@ -1,12 +1,25 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../utils/requestsSlice";
+import { addRequests, removeRequests } from "../utils/requestsSlice";
 import { useEffect } from "react";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.requests);
+
+  const reviewRequest = async (status, _id) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeRequests(_id));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
   const fetchRequests = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/requests/recieved", {
@@ -14,8 +27,6 @@ const Requests = () => {
       });
 
       await dispatch(addRequests(res.data.connectionRequests));
-      //console.log(res.data);
-      //console.log(res.data.connectionRequests);
     } catch (err) {
       console.log(err.message);
     }
@@ -26,7 +37,12 @@ const Requests = () => {
   }, []);
   if (!requests) return;
   if (requests.length === 0) {
-    return <h1> You have no connection requests</h1>;
+    return (
+      <div className=" px-4 py-3 flex items-center flex-col" role="alert">
+        <p className="font-bold">No Connection Requests</p>
+        <p className="text-sm">No Requests avaialble at this moment!</p>
+      </div>
+    );
   }
   //console.log(requests);
   return (
@@ -53,9 +69,20 @@ const Requests = () => {
                   {firstName} {lastName}
                 </h2>
                 <p>{about}</p>
+
                 <div className="card-actions justify-end my-3">
-                  <button className="btn btn-success">Accept</button>
-                  <button className="btn btn-error">Reject</button>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => reviewRequest("accepted", request._id)}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className="btn btn-error"
+                    onClick={() => reviewRequest("rejected", request._id)}
+                  >
+                    Reject
+                  </button>
                 </div>
               </div>
             </div>
@@ -67,18 +94,3 @@ const Requests = () => {
 };
 
 export default Requests;
-
-/*<div className="card card-side bg-black h-60 w-80 mb-3  shadow-xl">
-              <figure>
-                <img src={photoUrl} alt="Profile" className="rounded-full" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-blue-300">
-                  {firstName} {lastName}
-                </h2>
-                <button className="btn btn-success">Interested</button>
-                <button className="btn btn-error">Ignore</button>
-                <p className="text-slate-300 text-pretty">{about}</p>
-              </div>
-            </div>
-*/
