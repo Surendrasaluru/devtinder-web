@@ -21,7 +21,7 @@ const UserCard = (user) => {
   //console.log(user);
   const { _id, firstName, lastName, about, photoUrl } = user.user;
   return (
-    <div className="card card-side bg-base-100 w-[40%]  shadow-xl">
+    <div className="card card-side bg-base-100 w-[40%] mx-auto shadow-xl">
       <figure>
         <img src={photoUrl} alt="Profile" className="w-[250px] h-[250px]" />
       </figure>

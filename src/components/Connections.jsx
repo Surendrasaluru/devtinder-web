@@ -14,7 +14,7 @@ const Connections = () => {
       });
       await dispatch(addConnection(res?.data?.data));
 
-      console.log(res?.data?.data);
+      //console.log(res?.data?.data);
     } catch (err) {
       console.log(err.message);
     }
@@ -41,7 +41,7 @@ const Connections = () => {
                 <img
                   src={photoUrl}
                   alt="Profile"
-                  className="rounded-full w-40 object-cover"
+                  className="rounded-full w-40 max-h-40 object-cover"
                 />
               </figure>
               <div className="card-body">

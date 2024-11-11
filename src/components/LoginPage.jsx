@@ -53,12 +53,12 @@ const LoginPage = () => {
       //console.log(res);
       return navigate("/profile");
     } catch (err) {
-      console.log(err.message);
+      //console.log(err.message);
     }
   };
 
   return (
-    <div className="flex justify-center mt-3 h-auto">
+    <div className="flex flex-col overflow-visible justify-center mt-3 h-auto">
       <div className="shadow-2xl shadow-slate-900 mx-auto text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md mt-20 py-10 px-8 rounded-xl">
         <div className="">
           <div className="flex space-x-28">
@@ -137,6 +137,60 @@ const LoginPage = () => {
             >
               {isLoginForm ? "LOGIN" : "SIGNUP"}
             </button>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col py-2 mx-auto mt-5 w-[50%]">
+        <h1 className="card-title text-center items-center mb-2">
+          Frequently Asked Questions
+        </h1>
+        <div className="collapse collapse-arrow  bg-base-200">
+          <input type="radio" name="my-accordion-2" defaultChecked />
+          <div className="collapse-title text-xl  font-medium">
+            Is Devwave safe to use for people below 18?
+          </div>
+          <div className="collapse-content">
+            <p>
+              Yes, Devwave is safe for all people irrespective of age. Children
+              can also signup and increase their connections
+            </p>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow bg-base-200">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title w-1/2 text-xl font-medium">
+            Can I chat with my connections?
+          </div>
+          <div className="collapse-content w-1/2">
+            <p>
+              Currently that feature is in under development. We are trying yo
+              introduce chat feature by Jan 2025 😎.
+            </p>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow  bg-base-200">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title w-1\2 text-xl font-medium">
+            Is Devwave Free to Use or need any premium membership?
+          </div>
+          <div className="collapse-content w-1/2">
+            <p>
+              No, Devwave is absolutely free for everyone. we wont charge any
+              single rupee for any feature. we just need your email for signup
+              purpose thats it😉
+            </p>
+          </div>
+        </div>
+        <div className="collapse collapse-arrow  bg-base-200">
+          <input type="radio" name="my-accordion-2" />
+          <div className="collapse-title w-1\2 text-xl font-medium">
+            How to reach you for any queries or support?
+          </div>
+          <div className="collapse-content w-1/2">
+            <p>
+              Our Support Team is available throughout the day and you can reach
+              us at surendrasaluru@gmail.com for any queries.
+            </p>
           </div>
         </div>
       </div>

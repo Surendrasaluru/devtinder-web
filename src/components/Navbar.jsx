@@ -6,6 +6,9 @@ import { removeUser } from "../utils/userSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
+  const connection = useSelector((store) => store.connection);
+  const requests = useSelector((store) => store.requests);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -20,23 +23,55 @@ const Navbar = () => {
   };
   // console.log(user);
   return (
-    <div className="navbar bg-base">
+    <div className="navbar bg-base mt-3">
       <div className="flex-1">
         <Link to="/feed" className="btn btn-ghost text-xl text-white">
           devWAVE
         </Link>
       </div>
-      <div className="flex-none gap-2">
+      <div className="flex gap-2">
         {user && (
-          <div className="dropdown dropdown-end mx-5 flex items-center">
-            <p className="px-12 flex justify-center mr-[7rem]">
-              Welcome {user.firstName} start waving now!
+          <div className=" mx-3 flex justify-stretch">
+            <div className="flex list-none px-8">
+              <li className="mr-12">
+                <Link className="text-slate-300 hover:text-black" to="/profile">
+                  Profile
+                </Link>
+              </li>
+              <li className="mr-12">
+                <Link
+                  className="text-slate-300 hover:text-black"
+                  to="/connections"
+                >
+                  Connections ({connection && connection.length})
+                </Link>
+              </li>
+              <li className="mr-12">
+                <Link
+                  className="text-slate-300 hover:text-black"
+                  to="/requests"
+                >
+                  Requests ({requests && requests.length})
+                </Link>
+              </li>
+              <li className="mr-12">
+                <Link className="text-slate-300 hover:text-black" to="/quotes">
+                  Quotebox
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={handleLogout}
+                  className="text-slate-300 hover:text-red-400"
+                >
+                  Logout
+                </Link>
+              </li>
+            </div>
+            <p className="px-12 flex justify-center mr-[2rem]">
+              Welcome {user.firstName} 😍
             </p>
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
+            <div role="button" className="btn btn-circle avatar">
               <div className="w-22 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
@@ -45,11 +80,18 @@ const Navbar = () => {
                 />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1]  w-52 p-2 shadow"
-            >
-              <li>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
+
+/**
+ * 
+ * <li>
                 <Link to="/profile" className="justify-between">
                   Profile
                 </Link>
@@ -70,12 +112,24 @@ const Navbar = () => {
               <li>
                 <Link onClick={handleLogout}>Logout</Link>
               </li>
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
 
-export default Navbar;
+
+              menu menu-sm dropdown-content bg-base-100 rounded-box z-[1]  w-52 p-2 shadow
+
+
+
+              <ul class="flex">
+  <li class="mr-6">
+    <Link class="text-blue-500 hover:text-blue-800" href="#">Active</Link>
+  </li>
+  <Link class="mr-6">
+    <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+  </Link>
+  <Link class="mr-6">
+    <a class="text-blue-500 hover:text-blue-800" href="#">Link</a>
+  </Link>
+  <Link class="mr-6">
+    <a class="text-gray-400 cursor-not-allowed" href="#">Disabled</a>
+  </Link>
+</ul>
+ */

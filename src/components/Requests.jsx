@@ -54,21 +54,21 @@ const Requests = () => {
         return (
           <div
             key={request._id}
-            className="flex justify-center text-center flex-row"
+            className="flex justify-center text-center flex-row max-w-[500px] mx-auto"
           >
-            <div className="card card-side w-140 bg-base-100 shadow-xl">
+            <div className="card card-side w-140 max-w-160 bg-base-100 shadow-xl">
               <figure>
                 <img
                   src={photoUrl}
                   alt="Profile"
-                  className="rounded-full w-40"
+                  className="rounded-full w-40 max-h-40"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">
                   {firstName} {lastName}
                 </h2>
-                <p>{about}</p>
+                <p className="text-wrap">{about}</p>
 
                 <div className="card-actions justify-end my-3">
                   <button

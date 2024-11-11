@@ -7,6 +7,7 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import Requests from "./components/Requests";
 import Connections from "./components/Connections";
+import Quotebox from "./components/Quotebox";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/requests" element={<Requests />} />
             <Route path="/connections" element={<Connections />} />
+            <Route path="/quotes" element={<Quotebox />} />
           </Route>
         </Routes>
       </BrowserRouter>
